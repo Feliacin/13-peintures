@@ -521,122 +521,102 @@ footer { padding: 40px 0; border-top: 1px solid #eee; background: white; }
 }
 
 /* ==========================================
-   ADAPTATION MOBILE (RESPONSIVE)
+   CORRECTIF MOBILE - 13 PEINTURES
    ========================================== */
 
 @media (max-width: 768px) {
-    /* Global */
-    .container { padding: 0 20px; }
-    
-    /* Header & Nav */
+    /* 1. Header & Navigation (Le plus gros problème sur ta photo) */
     header {
         height: auto;
-        padding: 15px 0;
+        padding: 20px 0;
+        background: var(--beige); /* On remet un fond propre */
     }
 
     nav {
-        flex-direction: column;
+        flex-direction: column; /* On empile tout */
+        height: auto;
         gap: 20px;
     }
 
     .logo-wrapper {
-        top: 0; /* On annule le débordement sur mobile pour plus de clarté */
+        top: 0; /* On annule le débordement qui fait bugger le texte */
         flex-direction: column;
+        text-align: center;
         gap: 5px;
     }
 
     .main-logo {
-        height: 80px; /* Logo plus petit sur mobile */
+        height: 70px; /* Plus petit pour laisser de la place */
     }
 
     .nav-links {
-        flex-direction: column;
-        gap: 15px;
+        flex-direction: column; /* Les liens s'empilent verticalement */
         width: 100%;
+        gap: 12px;
+        padding: 0;
         text-align: center;
-        padding-bottom: 10px;
+    }
+
+    .nav-links li {
+        width: 100%;
     }
 
     .btn-nav {
-        width: 100%;
         display: block;
-    }
-
-    /* Hero Section */
-    .hero {
-        padding: 40px 0;
-        min-height: auto;
-    }
-
-    .hero-grid {
-        grid-template-columns: 1fr; /* On passe sur une seule colonne */
+        margin-top: 10px;
         text-align: center;
     }
 
+    /* 2. Hero Section */
+    .hero {
+        padding-top: 40px;
+        min-height: auto;
+        display: block; /* On repasse en flux normal */
+    }
+
+    .hero-grid {
+        display: flex;
+        flex-direction: column; /* Image d'abord, texte après */
+    }
+
+    .hero-image {
+        order: 1; /* L'image monte en haut */
+        margin-right: 0;
+        margin-bottom: 30px;
+    }
+
+    .hero-image img {
+        height: 250px;
+        border-radius: 15px;
+    }
+
+    .image-overlay {
+        display: none; /* On enlève le dégradé qui cache l'image sur mobile */
+    }
+
     .hero-text {
+        order: 2; /* Le texte descend */
         padding-right: 0;
-        order: 2; /* Le texte passe après l'image */
-        margin-top: 30px;
+        text-align: center;
     }
 
     .hero-text h1 {
-        font-size: 2.2rem; /* Titre plus petit pour mobile */
+        font-size: 2rem;
+        line-height: 1.2;
     }
 
     .hero-cta {
         flex-direction: column;
-        gap: 10px;
+        width: 100%;
     }
 
-    .hero-image {
-        order: 1; /* L'image passe en premier */
-        margin-right: 0;
-    }
-
-    .hero-image img {
-        border-radius: 15px; /* Arrondi complet sur mobile */
-        height: 300px;
-    }
-
-    .image-overlay {
-        display: none; /* On retire le dégradé latéral qui ne sert plus en colonne */
-    }
-
-    /* Services & Avis */
-    .section-title {
-        font-size: 2rem;
-        margin-bottom: 40px;
-    }
-
-    .services-visual-grid {
-        grid-template-columns: 1fr; /* Une seule colonne de services */
-    }
-
-    /* Contact Refined */
-    .contact-info-panel {
-        padding: 40px 20px;
-    }
-
-    .contact-info-panel h2 {
-        font-size: 2rem;
-    }
-
-    .contact-form-panel {
-        padding: 40px 20px;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr; /* Champs nom/email l'un sur l'autre */
-    }
-
-    /* Footer */
-    .footer-bottom {
-        flex-direction: column;
-        gap: 15px;
+    .btn-gold, .btn-dark {
+        width: 100%;
         text-align: center;
     }
 
-    .legal a {
-        margin: 0 10px;
+    /* 3. Ajustement de la grille de services */
+    .services-visual-grid {
+        grid-template-columns: 1fr; /* Une seule colonne */
     }
 }
