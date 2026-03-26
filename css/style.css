@@ -520,17 +520,14 @@ footer { padding: 40px 0; border-top: 1px solid #eee; background: white; }
     .form-row { grid-template-columns: 1fr; gap: 0; }
 }
 /* ==========================================
-   ADAPTATION MOBILE (RESPONSIVE)
+   ADAPTATION MOBILE RADICALE
    ========================================== */
 
 @media (max-width: 768px) {
-    /* Global */
-    .container { padding: 0 20px; }
-    
-    /* Header & Nav */
+    /* 1. HEADER : On passe tout en colonne et on centre */
     header {
-        height: auto;
-        padding: 15px 0;
+        height: auto; /* On laisse le header s'adapter au contenu */
+        padding: 20px 0;
     }
 
     nav {
@@ -538,104 +535,84 @@ footer { padding: 40px 0; border-top: 1px solid #eee; background: white; }
         gap: 20px;
     }
 
+    /* 2. LOGO : On réduit la taille et on enlève le décalage */
     .logo-wrapper {
-        top: 0; /* On annule le débordement sur mobile pour plus de clarté */
-        flex-direction: column;
-        gap: 5px;
+        top: 0; /* On remonte le logo à sa place */
+        justify-content: center;
+        gap: 10px;
     }
 
     .main-logo {
-        height: 80px; /* Logo plus petit sur mobile */
+        height: 60px; /* Moitié moins grand que sur desktop */
     }
 
+    .logo-text {
+        font-size: 1.4rem;
+    }
+
+    /* 3. MENU : En colonne comme tu l'as demandé */
     .nav-links {
         flex-direction: column;
-        gap: 15px;
+        width: 100%;
+        gap: 12px;
+        padding: 0;
+    }
+
+    .nav-links li {
         width: 100%;
         text-align: center;
-        padding-bottom: 10px;
     }
 
+    /* On transforme le bouton de devis en bouton large sur mobile */
     .btn-nav {
-        width: 100%;
         display: block;
+        width: 100%;
+        margin-top: 10px;
     }
 
-    /* Hero Section */
+    /* 4. HERO : On empile l'image et le texte */
     .hero {
-        padding: 40px 0;
-        min-height: auto;
+        padding: 20px 0;
     }
 
     .hero-grid {
-        grid-template-columns: 1fr; /* On passe sur une seule colonne */
-        text-align: center;
+        grid-template-columns: 1fr;
+        gap: 30px;
     }
 
     .hero-text {
         padding-right: 0;
-        order: 2; /* Le texte passe après l'image */
-        margin-top: 30px;
+        text-align: center; /* Plus harmonieux sur petit écran */
     }
 
     .hero-text h1 {
-        font-size: 2.2rem; /* Titre plus petit pour mobile */
+        font-size: 1.8rem; /* On évite que le titre ne dépasse */
     }
 
     .hero-cta {
-        flex-direction: column;
+        flex-direction: column; /* Boutons l'un sur l'autre */
         gap: 10px;
     }
 
+    /* 5. IMAGE HERO : On la met en valeur sans le décalage desktop */
     .hero-image {
-        order: 1; /* L'image passe en premier */
         margin-right: 0;
+        order: -1; /* Optionnel : met l'image AU-DESSUS du texte sur mobile */
     }
 
     .hero-image img {
-        border-radius: 15px; /* Arrondi complet sur mobile */
-        height: 300px;
+        height: 250px;
+        border-radius: 15px;
     }
 
     .image-overlay {
-        display: none; /* On retire le dégradé latéral qui ne sert plus en colonne */
+        display: none; /* On enlève le fondu latéral qui ne marche qu'en horizontal */
     }
 
-    /* Services & Avis */
-    .section-title {
-        font-size: 2rem;
-        margin-bottom: 40px;
-    }
-
-    .services-visual-grid {
-        grid-template-columns: 1fr; /* Une seule colonne de services */
-    }
-
-    /* Contact Refined */
-    .contact-info-panel {
-        padding: 40px 20px;
-    }
-
-    .contact-info-panel h2 {
-        font-size: 2rem;
-    }
-
-    .contact-form-panel {
-        padding: 40px 20px;
-    }
-
+    /* 6. GRILLES : On passe tout en 1 seule colonne */
+    .services-visual-grid, 
+    .testimonials-grid, 
     .form-row {
-        grid-template-columns: 1fr; /* Champs nom/email l'un sur l'autre */
-    }
-
-    /* Footer */
-    .footer-bottom {
-        flex-direction: column;
-        gap: 15px;
-        text-align: center;
-    }
-
-    .legal a {
-        margin: 0 10px;
+        grid-template-columns: 1fr;
     }
 }
