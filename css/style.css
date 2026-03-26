@@ -454,7 +454,9 @@ footer { padding: 35px 0; border-top: 1px solid #eee; background: white; }
     .tagline { font-size: 0.75rem; letter-spacing: 1.5px; }
     .hero-text p { font-size: 0.92rem; }
     .btn-gold, .btn-dark { padding: 13px 22px; font-size: 0.9rem; }
+    .hero-image { margin-right: -18px; margin-left: -18px; }
     .hero-image img { height: 260px; }
+    .image-overlay { background: none; border-radius: 16px; }
 
     /* Services */
     .services { padding: 50px 0; }
