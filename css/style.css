@@ -519,3 +519,124 @@ footer { padding: 40px 0; border-top: 1px solid #eee; background: white; }
     .contact-info-panel, .contact-form-panel { padding: 50px 30px; }
     .form-row { grid-template-columns: 1fr; gap: 0; }
 }
+
+/* ==========================================
+   ADAPTATION MOBILE (RESPONSIVE)
+   ========================================== */
+
+@media (max-width: 768px) {
+    /* Global */
+    .container { padding: 0 20px; }
+    
+    /* Header & Nav */
+    header {
+        height: auto;
+        padding: 15px 0;
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .logo-wrapper {
+        top: 0; /* On annule le débordement sur mobile pour plus de clarté */
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .main-logo {
+        height: 80px; /* Logo plus petit sur mobile */
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+
+    .btn-nav {
+        width: 100%;
+        display: block;
+    }
+
+    /* Hero Section */
+    .hero {
+        padding: 40px 0;
+        min-height: auto;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr; /* On passe sur une seule colonne */
+        text-align: center;
+    }
+
+    .hero-text {
+        padding-right: 0;
+        order: 2; /* Le texte passe après l'image */
+        margin-top: 30px;
+    }
+
+    .hero-text h1 {
+        font-size: 2.2rem; /* Titre plus petit pour mobile */
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .hero-image {
+        order: 1; /* L'image passe en premier */
+        margin-right: 0;
+    }
+
+    .hero-image img {
+        border-radius: 15px; /* Arrondi complet sur mobile */
+        height: 300px;
+    }
+
+    .image-overlay {
+        display: none; /* On retire le dégradé latéral qui ne sert plus en colonne */
+    }
+
+    /* Services & Avis */
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 40px;
+    }
+
+    .services-visual-grid {
+        grid-template-columns: 1fr; /* Une seule colonne de services */
+    }
+
+    /* Contact Refined */
+    .contact-info-panel {
+        padding: 40px 20px;
+    }
+
+    .contact-info-panel h2 {
+        font-size: 2rem;
+    }
+
+    .contact-form-panel {
+        padding: 40px 20px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr; /* Champs nom/email l'un sur l'autre */
+    }
+
+    /* Footer */
+    .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .legal a {
+        margin: 0 10px;
+    }
+}
