@@ -521,68 +521,84 @@ footer { padding: 40px 0; border-top: 1px solid #eee; background: white; }
 }
 
 /* ==========================================
-   CORRECTIF MOBILE - 13 PEINTURES
+   ADAPTATION MOBILE RADICALE
    ========================================== */
 
 @media (max-width: 768px) {
-    /* 1. Header & Navigation (Le plus gros problème sur ta photo) */
+    /* 1. HEADER : On passe tout en colonne et on centre */
     header {
-        height: auto;
+        height: auto; /* On laisse le header s'adapter au contenu */
         padding: 20px 0;
-        background: var(--beige); /* On remet un fond propre */
     }
 
     nav {
-        flex-direction: column; /* On empile tout */
-        height: auto;
+        flex-direction: column;
         gap: 20px;
     }
 
+    /* 2. LOGO : On réduit la taille et on enlève le décalage */
     .logo-wrapper {
-        top: 0; /* On annule le débordement qui fait bugger le texte */
-        flex-direction: column;
-        text-align: center;
-        gap: 5px;
+        top: 0; /* On remonte le logo à sa place */
+        justify-content: center;
+        gap: 10px;
     }
 
     .main-logo {
-        height: 70px; /* Plus petit pour laisser de la place */
+        height: 60px; /* Moitié moins grand que sur desktop */
     }
 
+    .logo-text {
+        font-size: 1.4rem;
+    }
+
+    /* 3. MENU : En colonne comme tu l'as demandé */
     .nav-links {
-        flex-direction: column; /* Les liens s'empilent verticalement */
+        flex-direction: column;
         width: 100%;
         gap: 12px;
         padding: 0;
-        text-align: center;
     }
 
     .nav-links li {
         width: 100%;
-    }
-
-    .btn-nav {
-        display: block;
-        margin-top: 10px;
         text-align: center;
     }
 
-    /* 2. Hero Section */
+    /* On transforme le bouton de devis en bouton large sur mobile */
+    .btn-nav {
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    /* 4. HERO : On empile l'image et le texte */
     .hero {
-        padding-top: 40px;
-        min-height: auto;
-        display: block; /* On repasse en flux normal */
+        padding: 20px 0;
     }
 
     .hero-grid {
-        display: flex;
-        flex-direction: column; /* Image d'abord, texte après */
+        grid-template-columns: 1fr;
+        gap: 30px;
     }
 
+    .hero-text {
+        padding-right: 0;
+        text-align: center; /* Plus harmonieux sur petit écran */
+    }
+
+    .hero-text h1 {
+        font-size: 1.8rem; /* On évite que le titre ne dépasse */
+    }
+
+    .hero-cta {
+        flex-direction: column; /* Boutons l'un sur l'autre */
+        gap: 10px;
+    }
+
+    /* 5. IMAGE HERO : On la met en valeur sans le décalage desktop */
     .hero-image {
-        order: 1; /* L'image monte en haut */
         margin-right: 0;
-        margin-bottom: 30px;
+        order: -1; /* Optionnel : met l'image AU-DESSUS du texte sur mobile */
     }
 
     .hero-image img {
@@ -591,32 +607,13 @@ footer { padding: 40px 0; border-top: 1px solid #eee; background: white; }
     }
 
     .image-overlay {
-        display: none; /* On enlève le dégradé qui cache l'image sur mobile */
+        display: none; /* On enlève le fondu latéral qui ne marche qu'en horizontal */
     }
 
-    .hero-text {
-        order: 2; /* Le texte descend */
-        padding-right: 0;
-        text-align: center;
-    }
-
-    .hero-text h1 {
-        font-size: 2rem;
-        line-height: 1.2;
-    }
-
-    .hero-cta {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .btn-gold, .btn-dark {
-        width: 100%;
-        text-align: center;
-    }
-
-    /* 3. Ajustement de la grille de services */
-    .services-visual-grid {
-        grid-template-columns: 1fr; /* Une seule colonne */
+    /* 6. GRILLES : On passe tout en 1 seule colonne */
+    .services-visual-grid, 
+    .testimonials-grid, 
+    .form-row {
+        grid-template-columns: 1fr;
     }
 }
