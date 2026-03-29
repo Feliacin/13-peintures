@@ -25,3 +25,10 @@ document.getElementById('contact-form')?.addEventListener('submit', function(e) 
     alert("Merci pour votre message ! 13 Peintures reviendra vers vous sous 24h.");
     this.reset();
 });
+
+// Toggle des images avant/après dans les services sur mobile
+document.querySelectorAll('.service-item').forEach(item => {
+    item.addEventListener('click', function() {
+        this.classList.toggle('touched');
+    });
+});
