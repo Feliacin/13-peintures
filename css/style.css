@@ -527,16 +527,17 @@ footer { padding: 35px 0; border-top: 1px solid #eee; background: white; }
     }
 }
 
-/* On s'assure que le conteneur est bien en position relative */
+/* --- Bloc Services Optinisé --- */
 .service-item {
     position: relative;
     height: 350px;
     border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
+    /* Supprime le carré gris au clic sur mobile */
+    -webkit-tap-highlight-color: transparent; 
 }
 
-/* Les deux images se superposent parfaitement */
 .service-item img {
     position: absolute;
     top: 0;
@@ -547,29 +548,25 @@ footer { padding: 35px 0; border-top: 1px solid #eee; background: white; }
     transition: opacity 0.6s ease-in-out, transform 0.6s ease;
 }
 
-/* L'image AVANT est invisible au départ */
+/* L'image AVANT est cachée par défaut */
 .img-before {
     opacity: 0;
-    z-index: 1; /* Elle passe au-dessus de l'image APRÈS lors du survol */
+    z-index: 2; /* Passe devant l'image APRES */
 }
 
-/* L'image APRÈS est en dessous */
 .img-after {
     opacity: 1;
-    z-index: 0;
+    z-index: 1;
 }
 
-/* Au survol (hover), l'image AVANT devient visible et on zoom légèrement */
-.service-item:hover .img-before {
-    opacity: 1;
-} 
-
+/* Effet au survol (Desktop) ET au toucher (Mobile via JS) */
+.service-item:hover .img-before,
 .service-item.touched .img-before {
     opacity: 1;
 }
 
-
-/* On s'assure que l'overlay de texte reste TOUJOURS au-dessus de tout */
+/* On s'assure que le texte reste toujours au-dessus de tout */
 .service-overlay {
-    z-index: 3;
+    z-index: 10;
+    pointer-events: none; /* Permet au clic de traverser le texte vers le conteneur */
 }
