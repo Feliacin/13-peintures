@@ -269,20 +269,30 @@
         // ===========================
         // EFFET TAP AVANT/APRÈS (mobile)
         // ===========================
+        // ===========================
+        // EFFET TAP AVANT/APRÈS (mobile)
+        // ===========================
         const serviceItems = document.querySelectorAll('.service-item');
 
         serviceItems.forEach(item => {
+            let startY = 0;
+
             item.addEventListener('touchstart', function(e) {
-                // Si l'item n'est pas encore "touché", on active et on désactive les autres
+                startY = e.touches[0].clientY;
+            }, { passive: true });
+
+            item.addEventListener('touchend', function(e) {
+                const endY = e.changedTouches[0].clientY;
+                // Si le doigt a bougé de plus de 10px = scroll, on ignore
+                if (Math.abs(endY - startY) > 10) return;
+
                 if (!this.classList.contains('touched')) {
-                    e.preventDefault(); // évite le déclenchement du hover fantôme
                     serviceItems.forEach(i => i.classList.remove('touched'));
                     this.classList.add('touched');
                 } else {
-                    // Deuxième tap : on revient à l'image après
                     this.classList.remove('touched');
                 }
-            }, { passive: false });
+            });
         });
 
         // ===========================
