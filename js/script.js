@@ -26,9 +26,4 @@ document.getElementById('contact-form')?.addEventListener('submit', function(e) 
     this.reset();
 });
 
-// Toggle des images avant/après dans les services sur mobile
-document.querySelectorAll('.service-item').forEach(item => {
-    item.addEventListener('click', function() {
-        this.classList.toggle('touched');
-    });
-});
+// ⚠️ Le toggle avant/après des service-item est géré dans index.html — ne pas dupliquer ici.
