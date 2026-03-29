@@ -267,6 +267,25 @@
         navClose.forEach(link => link.addEventListener('click', closeMenu));
 
         // ===========================
+        // EFFET TAP AVANT/APRÈS (mobile)
+        // ===========================
+        const serviceItems = document.querySelectorAll('.service-item');
+
+        serviceItems.forEach(item => {
+            item.addEventListener('touchstart', function(e) {
+                // Si l'item n'est pas encore "touché", on active et on désactive les autres
+                if (!this.classList.contains('touched')) {
+                    e.preventDefault(); // évite le déclenchement du hover fantôme
+                    serviceItems.forEach(i => i.classList.remove('touched'));
+                    this.classList.add('touched');
+                } else {
+                    // Deuxième tap : on revient à l'image après
+                    this.classList.remove('touched');
+                }
+            }, { passive: false });
+        });
+
+        // ===========================
         // FORMULAIRE WEB3FORMS
         // ===========================
         const form = document.getElementById('contact-form');
