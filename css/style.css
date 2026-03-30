@@ -214,8 +214,17 @@ nav { display: flex; justify-content: space-between; align-items: center; height
 }
 
 /* Survol desktop */
-.service-item:hover .img-before {
+.service-item:hover .img-before,
+.service-item.touched .img-before {
     opacity: 1;
+}
+
+/* Sur mobile (écrans tactiles) : désactive le :hover collant du navigateur.
+   Seule la classe .touched contrôle l'affichage — toggle fiable garanti. */
+@media (hover: none) {
+    .service-item:hover .img-before {
+        opacity: 0;
+    }
 }
 
 .service-overlay {
@@ -465,6 +474,10 @@ footer { padding: 35px 0; border-top: 1px solid #eee; background: white; }
 
     /* Badge visible sur mobile */
     .service-item::after { opacity: 1; }
+    .service-item.touched::after {
+        content: "Appuyer pour voir l'après";
+        opacity: 1;
+    }
 
     .testimonials { padding: 60px 0; }
     .testimonials-grid { grid-template-columns: 1fr; gap: 20px; }
