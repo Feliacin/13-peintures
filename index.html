@@ -272,28 +272,21 @@
         const serviceItems = document.querySelectorAll('.service-item');
 
         serviceItems.forEach(item => {
-            // Désactiver le menu contextuel au cas où le CSS ne suffirait pas
             item.addEventListener('contextmenu', e => e.preventDefault());
 
-            const showBefore = () => item.classList.add('touched');
-            const showAfter = () => item.classList.remove('touched');
-
-            // 1. On touche : on affiche "AVANT"
-            item.addEventListener('touchstart', (e) => {
-                showBefore();
+            item.addEventListener('touchstart', function(e) {
+                this.classList.add('touched');
             }, { passive: true });
 
-            // 2. On lâche normalement
-            item.addEventListener('touchend', showAfter);
+            // ✅ Utilise une arrow function pour garantir que `item` est bien référencé
+            // même si le touch est interrompu par un scroll
+            item.addEventListener('touchend', () => {
+                item.classList.remove('touched');
+            });
 
-            // 3. LE FIX : Si on commence à scroller, on remet "APRÈS" immédiatement
-            // pour éviter que l'image ne reste bloquée sur "AVANT" pendant le scroll
-            item.addEventListener('touchmove', (e) => {
-                showAfter(); 
-            }, { passive: true });
-
-            // 4. Sécurité si le système interrompt le toucher (appel, notification, etc.)
-            item.addEventListener('touchcancel', showAfter);
+            item.addEventListener('touchcancel', () => {
+                item.classList.remove('touched');
+            });
         });
 
         // ===========================

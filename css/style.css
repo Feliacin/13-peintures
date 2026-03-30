@@ -183,10 +183,16 @@ nav { display: flex; justify-content: space-between; align-items: center; height
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 .service-item img {
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: opacity 0.4s ease-in-out;
+    
+    /* ✅ Empêche le menu "Télécharger" et le drag natif */
+    -webkit-user-drag: none;
+    user-drag: none;
+    pointer-events: none; /* Les images ne captent plus les events, le parent .service-item le fait */
 }
 
 .service-overlay {
@@ -607,17 +613,3 @@ footer { padding: 35px 0; border-top: 1px solid #eee; background: white; }
     transition: opacity 0.4s ease-in-out !important; /* Un peu plus rapide pour la réactivité tactile */
 }
 
-.service-item {
-    /* Empêche le menu contextuel (iOS/Android) */
-    -webkit-touch-callout: none; 
-    /* Empêche la sélection de texte/image */
-    -webkit-user-select: none;
-    user-select: none;
-    /* Indispensable pour que le scroll ne bloque pas le JS */
-    touch-action: pan-y; 
-}
-
-.service-item img {
-    /* Sécurité supplémentaire sur les images */
-    pointer-events: none; 
-}
