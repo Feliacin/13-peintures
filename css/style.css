@@ -29,8 +29,6 @@ nav { display: flex; justify-content: space-between; align-items: center; height
     display: flex;
     align-items: center;
     gap: 10px;
-    position: static; /* Supprime le décalage mobile */
-    top: auto;
 }
 
 .main-logo {
@@ -68,7 +66,6 @@ nav { display: flex; justify-content: space-between; align-items: center; height
     border-radius: 2px;
     transition: all 0.3s ease;
 }
-/* Animation burger → croix */
 .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .burger.open span:nth-child(2) { opacity: 0; }
 .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -136,7 +133,6 @@ nav { display: flex; justify-content: space-between; align-items: center; height
 .btn-dark { background: var(--navy); color: white; padding: 15px 30px; text-decoration: none; border-radius: 4px; font-weight: 600; transition: all 0.3s ease; }
 .btn-dark:hover { background: #1a2a3a; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(15, 23, 42, 0.4); }
 
-/* IMAGE HERO */
 .hero-image {
     position: relative;
     height: 100%;
@@ -159,6 +155,7 @@ nav { display: flex; justify-content: space-between; align-items: center; height
    SERVICES
    =========================== */
 .services { padding: 40px 0; }
+
 .section-title {
     text-align: center;
     font-family: 'Playfair Display', serif;
@@ -167,6 +164,16 @@ nav { display: flex; justify-content: space-between; align-items: center; height
     color: var(--navy);
 }
 .section-title span { color: var(--gold); }
+
+.section-intro {
+    max-width: 850px;
+    margin: 0 auto 50px auto;
+    text-align: center;
+    line-height: 1.8;
+    font-size: 1.05rem;
+    color: var(--text);
+    padding: 0 10px;
+}
 
 .services-visual-grid {
     display: grid;
@@ -180,19 +187,36 @@ nav { display: flex; justify-content: space-between; align-items: center; height
     height: 350px;
     border-radius: 12px;
     overflow: hidden;
+    cursor: pointer;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    -webkit-tap-highlight-color: transparent;
 }
+
 .service-item img {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
     object-fit: cover;
     transition: opacity 0.4s ease-in-out;
-    
-    /* ✅ Empêche le menu "Télécharger" et le drag natif */
     -webkit-user-drag: none;
     user-drag: none;
-    pointer-events: none; /* Les images ne captent plus les events, le parent .service-item le fait */
+    pointer-events: none;
+}
+
+.img-before {
+    opacity: 0;
+    z-index: 2;
+}
+
+.img-after {
+    opacity: 1;
+    z-index: 1;
+}
+
+/* Survol desktop */
+.service-item:hover .img-before,
+.service-item.touched .img-before {
+    opacity: 1;
 }
 
 .service-overlay {
@@ -207,12 +231,32 @@ nav { display: flex; justify-content: space-between; align-items: center; height
     align-items: flex-end;
     padding: 30px;
     color: white;
+    z-index: 10;
+    pointer-events: none;
 }
+
 .service-content { text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
 .service-content h3 { font-size: 1.5rem; margin: 10px 0; color: var(--gold); font-weight: 800; }
 .service-content p { font-size: 0.95rem; opacity: 0.9; }
 
-
+/* Badge d'indication — mobile uniquement */
+.service-item::after {
+    content: "Appuyer pour voir l'avant";
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(15, 23, 42, 0.7);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 20;
+    pointer-events: none;
+    border: 1px solid var(--gold);
+}
 
 /* ===========================
    TESTIMONIALS
@@ -237,7 +281,7 @@ nav { display: flex; justify-content: space-between; align-items: center; height
 .client-name { display: block; font-weight: 800; color: var(--navy); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
 
 /* ===========================
-   CONTACT REFINED
+   CONTACT
    =========================== */
 .contact-refined { padding: 100px 0; background-color: var(--beige); }
 
@@ -341,50 +385,32 @@ footer { padding: 35px 0; border-top: 1px solid #eee; background: white; }
 .footer-bottom { display: flex; justify-content: space-between; align-items: center; color: #888; font-size: 0.9rem; flex-wrap: wrap; gap: 15px; }
 .legal a { margin-left: 20px; color: #888; text-decoration: none; }
 
-/* Style pour la page Mentions Légales */
+/* ===========================
+   MENTIONS LÉGALES
+   =========================== */
 .legal-page {
-    padding: 120px 30px 80px; /* Espace pour le header fixe */
+    padding: 120px 30px 80px;
     max-width: 900px !important;
 }
-
 .legal-page h1 {
     font-family: 'Playfair Display', serif;
     font-size: 3rem;
     margin-bottom: 50px;
     color: var(--navy);
 }
-
 .legal-page h1 span { color: var(--gold); }
-
-.legal-page h2 {
-    color: var(--navy);
-    margin: 40px 0 20px;
-    font-size: 1.4rem;
-}
-
-.legal-page p, .legal-page li {
-    line-height: 1.8;
-    color: var(--text);
-    margin-bottom: 15px;
-}
-
-.legal-page ul {
-    padding-left: 20px;
-    margin-bottom: 30px;
-}
+.legal-page h2 { color: var(--navy); margin: 40px 0 20px; font-size: 1.4rem; }
+.legal-page p, .legal-page li { line-height: 1.8; color: var(--text); margin-bottom: 15px; }
+.legal-page ul { padding-left: 20px; margin-bottom: 30px; }
 
 /* ===========================
-   RESPONSIVE — TABLETTE (768px)
+   RESPONSIVE — TABLETTE (900px)
    =========================== */
 @media (max-width: 900px) {
 
-    /* Header */
     header { height: 65px; }
-
-    /* Burger visible */
     .burger { display: flex; }
 
-    /* Menu mobile */
     .nav-links {
         display: flex;
         flex-direction: column;
@@ -402,11 +428,7 @@ footer { padding: 35px 0; border-top: 1px solid #eee; background: white; }
     }
     .nav-links.open { right: 0; }
     .nav-links li { list-style: none; }
-    .nav-links a {
-        color: rgba(255,255,255,0.85) !important;
-        font-size: 1.1rem;
-        display: block;
-    }
+    .nav-links a { color: rgba(255,255,255,0.85) !important; font-size: 1.1rem; display: block; }
     .nav-links a:hover { color: var(--gold) !important; }
     .btn-nav {
         background: var(--gold) !important;
@@ -418,7 +440,6 @@ footer { padding: 35px 0; border-top: 1px solid #eee; background: white; }
         width: 100%;
     }
 
-    /* Overlay menu */
     .menu-overlay {
         display: none;
         position: fixed;
@@ -429,40 +450,27 @@ footer { padding: 35px 0; border-top: 1px solid #eee; background: white; }
     }
     .menu-overlay.open { display: block; }
 
-    /* Hero tablette */
     .hero { padding: 60px 20px; min-height: auto; }
-    .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
     .hero-text { padding-right: 0; text-align: center; }
     .hero-text h1 { font-size: 2.6rem; }
     .hero-cta { justify-content: center; }
-
     .hero-image { margin-right: -20px; margin-left: -20px; }
-    .hero-image img {
-        height: 350px;
-        border-radius: 16px;
-    }
-    .image-overlay {
-        background: none;
-        border-radius: 16px;
-    }
+    .hero-image img { height: 350px; border-radius: 16px; }
+    .image-overlay { background: none; border-radius: 16px; }
 
-    /* Services */
     .services { padding: 60px 0; }
     .section-title { font-size: 2rem; }
-    .services-visual-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 15px;
-    }
+    .services-visual-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
     .service-item { height: 250px; }
 
-    /* Testimonials */
+    /* Badge visible sur mobile */
+    .service-item::after { opacity: 1; }
+    .service-item.touched::after { opacity: 0; }
+
     .testimonials { padding: 60px 0; }
     .testimonials-grid { grid-template-columns: 1fr; gap: 20px; }
 
-    /* Contact */
     .contact-refined { padding: 70px 0; }
     .contact-wrapper { grid-template-columns: 1fr; border-radius: 16px; }
     .contact-info-panel { padding: 50px 35px; }
@@ -470,7 +478,6 @@ footer { padding: 35px 0; border-top: 1px solid #eee; background: white; }
     .contact-form-panel { padding: 50px 35px; }
     .form-row { grid-template-columns: 1fr; gap: 0; }
 
-    /* Footer */
     .footer-bottom { flex-direction: column; text-align: center; }
     .legal { margin-top: 5px; }
     .legal a { margin: 0 10px; }
@@ -483,11 +490,9 @@ footer { padding: 35px 0; border-top: 1px solid #eee; background: white; }
 
     .container { padding: 0 18px; }
 
-    /* Logo */
     .logo-text { font-size: 1.1rem; }
     .main-logo { height: 40px; }
 
-    /* Hero */
     .hero { padding: 40px 18px 50px; }
     .hero-text h1 { font-size: 2rem; line-height: 1.15; }
     .tagline { font-size: 0.75rem; letter-spacing: 1.5px; }
@@ -497,119 +502,18 @@ footer { padding: 35px 0; border-top: 1px solid #eee; background: white; }
     .hero-image img { height: 260px; }
     .image-overlay { background: none; border-radius: 16px; }
 
-    /* Services */
     .services { padding: 50px 0; }
     .section-title { font-size: 1.7rem; }
+    .section-intro { font-size: 0.95rem; margin-bottom: 30px; }
     .services-visual-grid { grid-template-columns: 1fr; }
     .service-item { height: 280px; }
 
-    /* Contact */
     .contact-info-panel { padding: 40px 22px; }
     .contact-info-panel h2 { font-size: 1.7rem; }
     .contact-form-panel { padding: 40px 22px; }
     .btn-premium { padding: 16px 24px; font-size: 0.95rem; }
     .detail-text a { font-size: 1rem; }
 
-    /* Footer */
     footer { padding: 28px 0; }
     .footer-bottom { font-size: 0.82rem; }
 }
-
-.section-intro {
-    max-width: 850px;
-    margin: 0 auto 50px auto;
-    text-align: center;
-    line-height: 1.8;
-    font-size: 1.05rem;
-    color: var(--text);
-    padding: 0 10px;
-}
-
-/* Ajustement pour mobile */
-@media (max-width: 480px) {
-    .section-intro {
-        font-size: 0.95rem;
-        margin-bottom: 30px;
-    }
-}
-
-/* --- Bloc Services Optinisé --- */
-.service-item {
-    position: relative;
-    height: 350px;
-    border-radius: 12px;
-    overflow: hidden;
-    cursor: pointer;
-    /* Supprime le carré gris au clic sur mobile */
-    -webkit-tap-highlight-color: transparent; 
-}
-
-.service-item img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: opacity 0.6s ease-in-out, transform 0.6s ease;
-}
-
-/* L'image AVANT est cachée par défaut */
-.img-before {
-    opacity: 0;
-    z-index: 2; /* Passe devant l'image APRES */
-}
-
-.img-after {
-    opacity: 1;
-    z-index: 1;
-}
-
-/* Effet au survol (Desktop) ET au toucher (Mobile via JS) */
-.service-item:hover .img-before,
-.service-item.touched .img-before {
-    opacity: 1;
-}
-
-/* On s'assure que le texte reste toujours au-dessus de tout */
-.service-overlay {
-    z-index: 10;
-    pointer-events: none; /* Permet au clic de traverser le texte vers le conteneur */
-}
-
-/* Petit badge d'indication mobile */
-.service-item::after {
-    content: "Maintenir pour voir l'avant";
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: rgba(15, 23, 42, 0.7);
-    color: white;
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    opacity: 0;
-    transition: opacity 0.3s;
-    z-index: 20;
-    pointer-events: none;
-    border: 1px solid var(--gold);
-}
-
-/* On affiche l'indice uniquement sur les écrans tactiles */
-@media (max-width: 900px) {
-    .service-item::after {
-        opacity: 1;
-    }
-    
-    /* On cache l'indice quand on appuie pour ne pas gêner la vue */
-    .service-item.touched::after {
-        opacity: 0;
-    }
-}
-
-/* Correction de la transition pour plus de naturel */
-.service-item img {
-    transition: opacity 0.4s ease-in-out !important; /* Un peu plus rapide pour la réactivité tactile */
-}
-

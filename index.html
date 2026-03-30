@@ -267,25 +267,11 @@
         navClose.forEach(link => link.addEventListener('click', closeMenu));
 
         // ===========================
-        // EFFET "MAINTENIR POUR VOIR" (mobile)
+        // EFFET "TOUCHER POUR VOIR" (mobile)
         // ===========================
-        const serviceItems = document.querySelectorAll('.service-item');
-
-        serviceItems.forEach(item => {
-            item.addEventListener('contextmenu', e => e.preventDefault());
-
-            item.addEventListener('touchstart', function(e) {
-                this.classList.add('touched');
-            }, { passive: true });
-
-            // ✅ Utilise une arrow function pour garantir que `item` est bien référencé
-            // même si le touch est interrompu par un scroll
-            item.addEventListener('touchend', () => {
-                item.classList.remove('touched');
-            });
-
-            item.addEventListener('touchcancel', () => {
-                item.classList.remove('touched');
+        document.querySelectorAll('.service-item').forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('touched');
             });
         });
 
