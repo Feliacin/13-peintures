@@ -25,5 +25,3 @@ document.getElementById('contact-form')?.addEventListener('submit', function(e) 
     alert("Merci pour votre message ! 13 Peintures reviendra vers vous sous 24h.");
     this.reset();
 });
-
-// ⚠️ Le toggle avant/après des service-item est géré dans index.html — ne pas dupliquer ici.
