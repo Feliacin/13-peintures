@@ -272,21 +272,28 @@
         const serviceItems = document.querySelectorAll('.service-item');
 
         serviceItems.forEach(item => {
-            // On empêche le menu contextuel (clic droit) d'apparaître au maintien
+            // Désactiver le menu contextuel au cas où le CSS ne suffirait pas
             item.addEventListener('contextmenu', e => e.preventDefault());
 
-            // Quand on touche : on montre l'image "AVANT"
-            item.addEventListener('touchstart', function(e) {
-                this.classList.add('touched');
+            const showBefore = () => item.classList.add('touched');
+            const showAfter = () => item.classList.remove('touched');
+
+            // 1. On touche : on affiche "AVANT"
+            item.addEventListener('touchstart', (e) => {
+                showBefore();
             }, { passive: true });
 
-            // Quand on relâche ou qu'on quitte l'élément : on revient à "APRÈS"
-            const release = function() {
-                this.classList.remove('touched');
-            };
+            // 2. On lâche normalement
+            item.addEventListener('touchend', showAfter);
 
-            item.addEventListener('touchend', release);
-            item.addEventListener('touchcancel', release); // Au cas où le système interrompt le toucher
+            // 3. LE FIX : Si on commence à scroller, on remet "APRÈS" immédiatement
+            // pour éviter que l'image ne reste bloquée sur "AVANT" pendant le scroll
+            item.addEventListener('touchmove', (e) => {
+                showAfter(); 
+            }, { passive: true });
+
+            // 4. Sécurité si le système interrompt le toucher (appel, notification, etc.)
+            item.addEventListener('touchcancel', showAfter);
         });
 
         // ===========================

@@ -606,3 +606,18 @@ footer { padding: 35px 0; border-top: 1px solid #eee; background: white; }
 .service-item img {
     transition: opacity 0.4s ease-in-out !important; /* Un peu plus rapide pour la réactivité tactile */
 }
+
+.service-item {
+    /* Empêche le menu contextuel (iOS/Android) */
+    -webkit-touch-callout: none; 
+    /* Empêche la sélection de texte/image */
+    -webkit-user-select: none;
+    user-select: none;
+    /* Indispensable pour que le scroll ne bloque pas le JS */
+    touch-action: pan-y; 
+}
+
+.service-item img {
+    /* Sécurité supplémentaire sur les images */
+    pointer-events: none; 
+}
