@@ -249,7 +249,7 @@ nav { display: flex; justify-content: space-between; align-items: center; height
 
 /* Badge d'indication — mobile uniquement */
 .service-item::after {
-    content: "Appuyer pour voir l'avant";
+    content: "Après";
     position: absolute;
     top: 15px;
     right: 15px;
@@ -475,7 +475,7 @@ footer { padding: 35px 0; border-top: 1px solid #eee; background: white; }
     /* Badge visible sur mobile */
     .service-item::after { opacity: 1; }
     .service-item.touched::after {
-        content: "Appuyer pour voir l'après";
+        content: "Avant";
         opacity: 1;
     }
 
