@@ -267,15 +267,6 @@
         navClose.forEach(link => link.addEventListener('click', closeMenu));
 
         // ===========================
-        // EFFET "TOUCHER POUR VOIR" (mobile)
-        // ===========================
-        document.querySelectorAll('.service-item').forEach(item => {
-            item.addEventListener('click', () => {
-                item.classList.toggle('touched');
-            });
-        });
-
-        // ===========================
         // FORMULAIRE WEB3FORMS
         // ===========================
         const form = document.getElementById('contact-form');
