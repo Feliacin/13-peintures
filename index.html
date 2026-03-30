@@ -267,35 +267,26 @@
         navClose.forEach(link => link.addEventListener('click', closeMenu));
 
         // ===========================
-        // EFFET TAP AVANT/APRÈS (mobile)
+        // EFFET "MAINTENIR POUR VOIR" (mobile)
         // ===========================
         const serviceItems = document.querySelectorAll('.service-item');
 
         serviceItems.forEach(item => {
-            let startY = 0;
+            // On empêche le menu contextuel (clic droit) d'apparaître au maintien
+            item.addEventListener('contextmenu', e => e.preventDefault());
 
-            item.addEventListener('touchstart', (e) => {
-                startY = e.touches[0].clientY;
+            // Quand on touche : on montre l'image "AVANT"
+            item.addEventListener('touchstart', function(e) {
+                this.classList.add('touched');
             }, { passive: true });
 
-            item.addEventListener('touchend', function(e) {
-                const endY = e.changedTouches[0].clientY;
-                
-                // Si l'utilisateur scrolle (plus de 10px), on ne déclenche pas l'effet
-                if (Math.abs(endY - startY) > 10) return;
+            // Quand on relâche ou qu'on quitte l'élément : on revient à "APRÈS"
+            const release = function() {
+                this.classList.remove('touched');
+            };
 
-                // Empêche le comportement par défaut qui pourrait bloquer l'effet
-                e.preventDefault(); 
-
-                // Si cet item est déjà actif, on l'éteint, sinon on l'allume
-                if (this.classList.contains('touched')) {
-                    this.classList.remove('touched');
-                } else {
-                    // Optionnel : ferme les autres images ouvertes pour n'en garder qu'une
-                    serviceItems.forEach(i => i.classList.remove('touched'));
-                    this.classList.add('touched');
-                }
-            });
+            item.addEventListener('touchend', release);
+            item.addEventListener('touchcancel', release); // Au cas où le système interrompt le toucher
         });
 
         // ===========================

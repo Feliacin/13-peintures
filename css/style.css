@@ -570,3 +570,39 @@ footer { padding: 35px 0; border-top: 1px solid #eee; background: white; }
     z-index: 10;
     pointer-events: none; /* Permet au clic de traverser le texte vers le conteneur */
 }
+
+/* Petit badge d'indication mobile */
+.service-item::after {
+    content: "Maintenir pour voir l'avant";
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(15, 23, 42, 0.7);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 20;
+    pointer-events: none;
+    border: 1px solid var(--gold);
+}
+
+/* On affiche l'indice uniquement sur les écrans tactiles */
+@media (max-width: 900px) {
+    .service-item::after {
+        opacity: 1;
+    }
+    
+    /* On cache l'indice quand on appuie pour ne pas gêner la vue */
+    .service-item.touched::after {
+        opacity: 0;
+    }
+}
+
+/* Correction de la transition pour plus de naturel */
+.service-item img {
+    transition: opacity 0.4s ease-in-out !important; /* Un peu plus rapide pour la réactivité tactile */
+}
